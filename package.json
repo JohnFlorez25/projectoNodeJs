@@ -1,20 +1,27 @@
 {
-  "name": "projecto_express",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "backendnode",
+  "version": "0.1.0",
+  "description": "Creando un chat haciendo uso de NodeJs",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "nodemon": "^1.18.10"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JohnFlorez25/projectoNodeJs.git"
   },
+  "keywords": [
+    "chat",
+    "telegram",
+    "server"
+  ],
+  "author": "John Faber Flórez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JohnFlorez25/projectoNodeJs/issues"
+  },
+  "homepage": "https://github.com/JohnFlorez25/projectoNodeJs#readme",
   "dependencies": {
-    "babel-eslint": "^10.0.1",
-    "express": "^4.16.4",
-    "mongoose": "^5.4.19",
-    "standard": "^12.0.1"
+    "express": "^4.17.1"
   }
 }
