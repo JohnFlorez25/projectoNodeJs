@@ -1,12 +1,7 @@
-//RESPUESTAS COHERENTES
-//Facil de entender y facil de usar, responder a todas las peticiones
-//desde el mismo sitio, agregamos un nuevo archivo, en la carpeta network
-//Tenemos todos los elementos de la capa de red de la aplicación completa.
-
+//Servir archivos estáticos
 const express = require('express');
 const bodyParser = require('body-parser');
 
-//Requiriendo el archivo de response
 const response = require('./network/response');
 
 const router = express.Router()
@@ -40,7 +35,8 @@ router.post('/message', (req, res) =>{
     }
     
 });
-
+//pasar la carpeta donde quiero guardar los estaticos
+app.use('/app', express.static('public'))
 
 app.listen(3001);
 console.log('La aplicación se está escuchando en http://localhost:3001');
