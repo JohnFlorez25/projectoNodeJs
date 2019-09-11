@@ -1,4 +1,4 @@
-//Servir archivos estáticos
+//Errores: Cómo presentarlos e implicaciones de seguridad
 const express = require('express');
 const bodyParser = require('body-parser');
 
@@ -26,16 +26,15 @@ router.get('/message', (req, res) =>{
 
 router.post('/message', (req, res) =>{
     console.log(req.body)
-    //console.log(req.query)
     //simulando un error
     if(req.query.error == "ok"){
-        response.error(req,res, 'Error simulado', 400);
+        response.error(req,res, 'Error inesperado', 500, 'Es solo una simulación de los errores');
     }else{
         response.success(req,res, 'Creado correctamente',201);
     }
     
 });
-//pasar la carpeta donde quiero guardar los estaticos
+
 app.use('/app', express.static('public'))
 
 app.listen(3001);
