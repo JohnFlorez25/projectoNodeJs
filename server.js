@@ -1,5 +1,8 @@
-//Usando las cabeceras: saber de donde vienen la petición
-//las peticiones se envian por la REQUEST
+//Tipos de respuestas
+// 1. Vacia
+// 2. Plana
+// 3. Con Datos
+// 4. Estruturada
 const express = require('express');
 
 const bodyParser = require('body-parser');
@@ -13,19 +16,25 @@ app.use(router);
 
 //http://localhost:3001/message
 router.get('/message', (req, res) =>{
-    //Accediendo a las cabeceras
+
     console.log(req.headers)
-    //Tambien puedo enviar header en la respuesta
     res.header({
         "custom-header": "nuestro valor personalizado",
     })
     res.send('Lista de mensajes')
 });
 
-router.delete('/message', (req, res) =>{
+router.post('/message', (req, res) =>{
     console.log(req.body)
     console.log(req.query)
-    res.send('Mensaje '+ req.body.name + ' añadido correctamente');
+    //Respuesta plana
+    //res.send('Mensaje '+ req.body.name + ' añadido correctamente');
+    //Respuesta vacia
+    //res.send();
+    //Devolver un estado
+    //res.status(201).send();
+    //Devolver Objetos con serie de información
+    res.status(201).send({error: '', body: 'Creado correctamente'});
 });
 
 
