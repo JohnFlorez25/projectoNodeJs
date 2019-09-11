@@ -1,15 +1,19 @@
-//Tipos de respuestas
-// 1. Vacia
-// 2. Plana
-// 3. Con Datos
-// 4. Estruturada
-const express = require('express');
+//RESPUESTAS COHERENTES
+//Facil de entender y facil de usar, responder a todas las peticiones
+//desde el mismo sitio, agregamos un nuevo archivo, en la carpeta network
+//Tenemos todos los elementos de la capa de red de la aplicación completa.
 
+const express = require('express');
 const bodyParser = require('body-parser');
+
+//Requiriendo el archivo de response
+const response = require('./network/response');
+
 const router = express.Router()
 
 const app = express();
-//tipos de body que quiero enviar
+
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(router);
@@ -21,26 +25,24 @@ router.get('/message', (req, res) =>{
     res.header({
         "custom-header": "nuestro valor personalizado",
     })
-    res.send('Lista de mensajes')
+    //usando response exitoso
+    response.success(req,res, 'Lista de mensajes');
 });
 
 router.post('/message', (req, res) =>{
     console.log(req.body)
-    console.log(req.query)
-    //Respuesta plana
-    //res.send('Mensaje '+ req.body.name + ' añadido correctamente');
-    //Respuesta vacia
-    //res.send();
-    //Devolver un estado
-    //res.status(201).send();
-    //Devolver Objetos con serie de información
-    res.status(201).send({error: '', body: 'Creado correctamente'});
+    //console.log(req.query)
+    //simulando un error
+    if(req.query.error == "ok"){
+        response.error(req,res, 'Error simulado', 400);
+    }else{
+        response.success(req,res, 'Creado correctamente',201);
+    }
+    
 });
 
 
-//Ejecutar nuestra aplicación de express (Utilizar un puerto) -> Por donde va a escuchar?
 app.listen(3001);
-//Mensaje de verificación
 console.log('La aplicación se está escuchando en http://localhost:3001');
 
 
