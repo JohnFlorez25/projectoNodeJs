@@ -1,10 +1,8 @@
-//La capa de RED recibe todas las peticiones HTTP, procesar información y enviarla
-//al controlador
-
-//necesitamos importar express
 const express = require('express');
 //importar response
 const response = require('../../network/response');
+//importando el controlador
+const controller = require('./controller');
 //crear el router
 const router = express.Router();
 
@@ -19,14 +17,16 @@ router.get('/', (req, res) =>{
 });
 
 router.post('/', (req, res) =>{
-    console.log(req.body)
     
-    if(req.query.error == "ok"){
-        response.error(req,res, 'Error inesperado', 500, 'Es solo una simulación de los errores');
-    }else{
-        response.success(req,res, 'Creado correctamente',201);
-    }
-    
+    //como es una promesa puedo usar then y catch
+    controller.addMessage(req.body.user, req.body.message)
+        //responder con fullMessage
+        .then((fullMessage) =>{
+            response.success(req,res, fullMessage, 201);
+        })
+        .catch(e => {
+            response.error(req,res, 'Información Inválida', 400, 'Error en el controlador');
+        });
 });
 
 //exportar los router
