@@ -79,3 +79,24 @@ Las queries van a permitirte añadir información extra a los datos que queramos
 
 Al instalar node tenemos acceso al comando npm (Node Package Manager) permite gestionar y trabajar con paquetes node en paralelo con otros lenguajes es parecido a librerías o porciones de código de apoyo a nuestra implementación.
 
+## Estructura de una aplicación Node JS
+Cualquier aplicación va a tener tres puntos de responsabilidad, que deben responder a tres preguntas:
+
+1. ¿Cómo me comunico con ella?
+2. ¿Qué hace?
+3. ¿Dónde y cómo se guardan los resultados?
+
+La respuesta a estos tres puntos, corresponden a las tres capas que vamos a generar:
+
+- Capa de red (en inglés “network”)
+- Capa controladora (en inglés, “controller”)
+- Capa de almacenamiento (en inglés, “store”)
+
+
+La primera capa es una capa de red, porque la conexión con la aplicación se hace a través del protocolo de comunicación en red HTTP. Es la responsable de comunicar al cliente HTTP con nuestro código del controlador.
+
+El protocolo HTTP construye una petición con una dirección (route), un verbo (method), unas cabeceras (headers) y un mensaje (body).
+
+Por esto, cada uno de nuestros componentes, tendrá un archivo **“network.js”** encargado de traducir la petición del cliente HTTP a la acción que queremos realizar en nuestro controlador.
+
+Así, lo que hace nuestro código (la funcionalidad) no está acoplado a unos requisitos de red, y puede ser reutilizado con otras fuentes de entrada (colas MQTT, una biblioteca externa, microservicios…).
