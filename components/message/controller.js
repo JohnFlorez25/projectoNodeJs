@@ -1,6 +1,9 @@
 //Archivo que define todo lo que sucede con las funciones necesarias
 //1. AÑADIR UN NUEVO MENSAJE
 
+//Requiriendo el almacenamiento
+const store = require('./store');
+
 const addMessage = (user, message) => {
     //Trabajando con promesas
     return new Promise( (resolve, reject) =>{
@@ -15,12 +18,21 @@ const addMessage = (user, message) => {
             message: message,
             date: new Date()
         };
-        console.log(fullMessage);
+
+        store.add(fullMessage)
+        
         resolve(fullMessage)
+    });
+}
+
+const getMessages = () =>{
+    return new Promise((resolve, reject) =>{
+        resolve(store.list())
     });
 }
 
 //exportar todas las funciones que deseemos
 module.exports = {
-    addMessage
+    addMessage,
+    getMessages
 }
