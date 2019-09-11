@@ -1,7 +1,7 @@
-//Observando como funciona el body y query
+//Usando las cabeceras: saber de donde vienen la petición
+//las peticiones se envian por la REQUEST
 const express = require('express');
-//Body.parser nos permite trabajar con el body de la petición de forma sencilla
-//npm i body-parser
+
 const bodyParser = require('body-parser');
 const router = express.Router()
 
@@ -11,16 +11,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(router);
 
-
+//http://localhost:3001/message
 router.get('/message', (req, res) =>{
+    //Accediendo a las cabeceras
+    console.log(req.headers)
+    //Tambien puedo enviar header en la respuesta
+    res.header({
+        "custom-header": "nuestro valor personalizado",
+    })
     res.send('Lista de mensajes')
 });
-//El body siempre lo encontramos en el request
+
 router.delete('/message', (req, res) =>{
-    //trabajanco con el cuerpo
     console.log(req.body)
-    //acceder a los parametros por query
-    //http://localhost:3001/message?orderBy=id&age=26
     console.log(req.query)
     res.send('Mensaje '+ req.body.name + ' añadido correctamente');
 });
